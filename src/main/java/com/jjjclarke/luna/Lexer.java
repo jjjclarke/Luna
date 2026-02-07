@@ -74,9 +74,11 @@ public class Lexer {
                 break;
             case '/':
                 if (match('/')) {
-                    // A comment. Ignore it.
+                    // A single line comment //
                     while (peek() != '\n' && !isAtEnd())
                         advance();
+                } else if (match('*')) {
+                    handleComment();
                 } else {
                     addToken(SLASH);
                 }
@@ -160,6 +162,15 @@ public class Lexer {
         if (type == null)
             type = IDENTIFIERS;
         addToken(type);
+    }
+
+    private void handleComment() {
+        while (peek() != '*')
+            advance();
+        while (peek() != '/')
+            advance();
+
+        advance();
     }
 
     // =========================================================
