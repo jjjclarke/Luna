@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Luna {
     static boolean hadError = false;
@@ -48,14 +49,12 @@ public class Luna {
     }
 
     private static void run(String source) {
-        /*
         Lexer lexer = new Lexer(source);
         List<Token> tokens = lexer.scanTokens();
 
         for (Token t : tokens) {
             System.out.println(t);
         }
-         */
     }
 
     // ====================================================================
