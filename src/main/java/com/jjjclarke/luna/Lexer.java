@@ -1,11 +1,37 @@
 package com.jjjclarke.luna;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.jjjclarke.luna.TokenType.*;
 
 public class Lexer {
+    // TODO: Move this somewhere much neater.
+    private static final Map<String, TokenType> keywords;
+
+    static {
+        keywords = new HashMap<>();
+        keywords.put("and",    AND);
+        keywords.put("class",  CLASS);
+        keywords.put("else",   ELSE);
+        keywords.put("false",  FALSE);
+        keywords.put("for",    FOR);
+        keywords.put("fun",    FUN);
+        keywords.put("if",     IF);
+        keywords.put("nil",    NIL);
+        keywords.put("or",     OR);
+        keywords.put("print",  PRINT);
+        keywords.put("return", RETURN);
+        keywords.put("super",  SUPER);
+        keywords.put("this",   THIS);
+        keywords.put("true",   TRUE);
+        keywords.put("var",    VAR);
+        keywords.put("while",  WHILE);
+    }
+    // END
+
     private final String source;
     private final List<Token> tokens;
 
@@ -31,6 +57,8 @@ public class Lexer {
             case '+': addToken(PLUS); break;
             case ';': addToken(SEMICOLON); break;
             case '*': addToken(STAR); break;
+
+            case '"': handleString(); break;
 
             case '!':
                 addToken(match('=') ? BANG_EQUAL : BANG);
@@ -64,7 +92,15 @@ public class Lexer {
                 break;
 
             default:
-                Luna.error(line, "Unexpected character.");
+                if (isDigit(c)) {
+                    handleNumber();
+                } else if (isAlpha(c)) {
+                    handleIdentifier();
+                } else {
+                    Luna.error(line, "Unexpected character.");
+                }
+
+                // Luna.error(line, "Unexpected character.");
                 break;
         }
     }
@@ -77,6 +113,53 @@ public class Lexer {
 
         addToken(EOF);
         return tokens;
+    }
+
+    // =========================================================
+
+    private void handleString() {
+        while (peek() != '"' && !isAtEnd()) {
+            if (peek() == '\n')
+                line++;
+
+            advance();
+        }
+
+        if (isAtEnd()) {
+            Luna.error(line, "Unterminated string.");
+            return;
+        }
+
+        advance(); // Closing "
+
+        String value = source.substring(start + 1, current - 1);
+        addToken(STRING, value);
+    }
+
+    private void handleNumber() {
+        while (isDigit(peek()))
+            advance();
+
+        if (peek() == '.' && isDigit(peekNext())) {
+            // eat
+            advance();
+
+            while (isDigit(peek()))
+                advance();
+        }
+
+        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
+    }
+
+    private void handleIdentifier() {
+        while (isAlphaNumeric(peek()))
+            advance();
+
+        String text = source.substring(start, current);
+        TokenType type = keywords.get(text);
+        if (type == null)
+            type = IDENTIFIERS;
+        addToken(type);
     }
 
     // =========================================================
@@ -109,6 +192,27 @@ public class Lexer {
             return '\0';
 
         return source.charAt(current);
+    }
+
+    private char peekNext() {
+        if (current + 1 >= source.length())
+            return '\0';
+
+        return source.charAt(current + 1);
+    }
+
+    private boolean isDigit(char c) {
+        return c >= '0' && c <= '9';
+    }
+
+    private boolean isAlpha(char c) {
+        return (c >= 'a' && c <= 'z') ||
+                (c >= 'A' && c <= 'Z') ||
+                c == '_';
+    }
+
+    private boolean isAlphaNumeric(char c) {
+        return isAlpha(c) || isDigit(c);
     }
 
     private boolean isAtEnd() {
