@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="538ad153-6079-4c42-9aec-f69be6c9b508" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/luna/test.luna" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Luna.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Luna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Environment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/TokenType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/TokenType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +30,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -54,7 +56,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "refactor",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "C:/Users/James/IdeaProjects/Luna/src/main/java/com/jjjclarke/luna/Main.java",
     "project.structure.last.edited": "Project",
@@ -126,6 +128,29 @@
       <updated>1770462231608</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/refactor" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
