@@ -1,10 +1,12 @@
 package com.jjjclarke.luna;
 
 public class Return extends RuntimeException {
-    final Object value;
+    public final Object value;
 
     public Return(Object value) {
-        super(null, null, false, false); // disalbes JVM stuff
+        // This constructor disables some JVM functionality that is unnecessary and unneeded.
+        super(null, null, false, false);
+
         this.value = value;
     }
 }

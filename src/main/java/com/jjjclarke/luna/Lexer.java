@@ -8,7 +8,6 @@ import java.util.Map;
 import static com.jjjclarke.luna.TokenType.*;
 
 public class Lexer {
-    // TODO: Move this somewhere much neater.
     private static final Map<String, TokenType> keywords;
 
     static {
@@ -30,10 +29,9 @@ public class Lexer {
         keywords.put("var",    VAR);
         keywords.put("while",  WHILE);
     }
-    // END
 
     private final String source;
-    private final List<Token> tokens;
+    private final List<Token> tokens = new ArrayList<>();
 
     private int start = 0;
     private int current = 0;
@@ -41,11 +39,21 @@ public class Lexer {
 
     public Lexer(String source) {
         this.source = source;
-        tokens = new ArrayList<>();
+    }
+
+    public List<Token> scanTokens() {
+        while (!isAtEnd()) {
+            start = current;
+            scanToken();
+        }
+
+        addToken(EOF);
+        return tokens;
     }
 
     private void scanToken() {
         char c = advance();
+
         switch (c) {
             case '(': addToken(LEFT_PAREN); break;
             case ')': addToken(RIGHT_PAREN); break;
@@ -74,7 +82,6 @@ public class Lexer {
                 break;
             case '/':
                 if (match('/')) {
-                    // A single line comment //
                     while (peek() != '\n' && !isAtEnd())
                         advance();
                 } else if (match('*')) {
@@ -87,6 +94,7 @@ public class Lexer {
             case ' ':
             case '\r':
             case '\t':
+                // Ignore whitespace.
                 break;
 
             case '\n':
@@ -102,22 +110,37 @@ public class Lexer {
                     Luna.error(line, "Unexpected character.");
                 }
 
-                // Luna.error(line, "Unexpected character.");
                 break;
         }
     }
 
-    public List<Token> scanTokens() {
-        while (!isAtEnd()) {
-            start = current;
-            scanToken();
-        }
+    // =========================================================
 
-        addToken(EOF);
-        return tokens;
+    private void handleIdentifier() {
+        while (isAlphaNumeric(peek()))
+            advance();
+
+        String text = source.substring(start, current);
+        TokenType type = keywords.get(text);
+        if (type == null)
+            type = IDENTIFIERS;
+        addToken(type);
     }
 
-    // =========================================================
+    private void handleNumber() {
+        while (isDigit(peek()))
+            advance();
+
+        if (peek() == '.' && isDigit(peekNext())) {
+            // eat
+            advance();
+
+            while (isDigit(peek()))
+                advance();
+        }
+
+        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
+    }
 
     private void handleString() {
         while (peek() != '"' && !isAtEnd()) {
@@ -138,32 +161,6 @@ public class Lexer {
         addToken(STRING, value);
     }
 
-    private void handleNumber() {
-        while (isDigit(peek()))
-            advance();
-
-        if (peek() == '.' && isDigit(peekNext())) {
-            // eat
-            advance();
-
-            while (isDigit(peek()))
-                advance();
-        }
-
-        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
-    }
-
-    private void handleIdentifier() {
-        while (isAlphaNumeric(peek()))
-            advance();
-
-        String text = source.substring(start, current);
-        TokenType type = keywords.get(text);
-        if (type == null)
-            type = IDENTIFIERS;
-        addToken(type);
-    }
-
     private void handleComment() {
         while (peek() != '*')
             advance();
@@ -174,19 +171,6 @@ public class Lexer {
     }
 
     // =========================================================
-
-    private char advance() {
-        return source.charAt(current++);
-    }
-
-    private void addToken(TokenType type) {
-        addToken(type, null);
-    }
-
-    private void addToken(TokenType type, Object literal) {
-        String text = source.substring(start, current);
-        tokens.add(new Token(type, text, literal, line));
-    }
 
     private boolean match(char expected) {
         if (isAtEnd())
@@ -212,10 +196,6 @@ public class Lexer {
         return source.charAt(current + 1);
     }
 
-    private boolean isDigit(char c) {
-        return c >= '0' && c <= '9';
-    }
-
     private boolean isAlpha(char c) {
         return (c >= 'a' && c <= 'z') ||
                 (c >= 'A' && c <= 'Z') ||
@@ -226,7 +206,25 @@ public class Lexer {
         return isAlpha(c) || isDigit(c);
     }
 
+    private boolean isDigit(char c) {
+        return c >= '0' && c <= '9';
+    }
+
     private boolean isAtEnd() {
         return current >= source.length();
     }
+
+    private char advance() {
+        return source.charAt(current++);
+    }
+
+    private void addToken(TokenType type) {
+        addToken(type, null);
+    }
+
+    private void addToken(TokenType type, Object literal) {
+        String text = source.substring(start, current);
+        tokens.add(new Token(type, text, literal, line));
+    }
+
 }
