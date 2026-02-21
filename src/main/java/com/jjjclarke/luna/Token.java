@@ -1,10 +1,10 @@
 package com.jjjclarke.luna;
 
 public class Token {
-    TokenType type;
-    String lexeme;
-    Object literal;
-    int line;
+    public final TokenType type;
+    public final String lexeme;
+    public final Object literal;
+    public final int line;
 
     public Token(TokenType type, String lexeme, Object literal, int line) {
         this.type = type;
@@ -14,6 +14,6 @@ public class Token {
     }
 
     public String toString() {
-        return "TokenType " + type + " - Value " + lexeme + " (literal: " + literal + ") at line " + line;
+        return type + " " + lexeme + " " + literal;
     }
 }

@@ -12,11 +12,6 @@ class LunaFunction implements LunaCallable {
     }
 
     @Override
-    public String toString() {
-        return "<fn " + declaration.name.lexeme + ">";
-    }
-
-    @Override
     public int arity() {
         return declaration.params.size();
     }
@@ -24,9 +19,9 @@ class LunaFunction implements LunaCallable {
     @Override
     public Object call(Interpreter interpreter, List<Object> arguments) {
         Environment environment = new Environment(closure);
+
         for (int i = 0; i < declaration.params.size(); i++) {
-            environment.define(declaration.params.get(i).lexeme,
-                    arguments.get(i));
+            environment.define(declaration.params.get(i).lexeme, arguments.get(i));
         }
 
         try {
@@ -34,6 +29,12 @@ class LunaFunction implements LunaCallable {
         } catch (Return returnValue) {
             return returnValue.value;
         }
+
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "<fn " + declaration.name.lexeme +">";
     }
 }
