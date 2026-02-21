@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
-	final Environment globals = new Environment();
+	public final Environment globals = new Environment();
 	private Environment environment = globals;
 
-	Interpreter() {
+	public Interpreter() {
 		globals.define("clock", new LunaCallable() {
 			@Override
 			public int arity() {
@@ -26,7 +26,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 		});
 	}
 
-	void interpret(List<Stmt> statements) {
+	public void interpret(List<Stmt> statements) {
 		try {
 			for (Stmt statement : statements) {
 				execute(statement);
@@ -44,7 +44,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 		stmt.accept(this);
 	}
 
-	void executeBlock(List<Stmt> statements, Environment environment) {
+	public void executeBlock(List<Stmt> statements, Environment environment) {
 		Environment previous = this.environment;
 		try {
 			this.environment = environment;
@@ -78,7 +78,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
 	@Override
 	public Void visitIfStmt(Stmt.If stmt) {
-		if (isTruthy(evaluate(stmt.condition))) {
+		if (isTruth(evaluate(stmt.condition))) {
 			execute(stmt.thenBranch);
 		} else if (stmt.elseBranch != null) {
 			execute(stmt.elseBranch);
@@ -115,7 +115,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
 	@Override
 	public Void visitWhileStmt(Stmt.While stmt) {
-		while (isTruthy(evaluate(stmt.condition))) {
+		while (isTruth(evaluate(stmt.condition))) {
 			execute(stmt.body);
 		}
 		return null;
@@ -211,10 +211,10 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 		Object left = evaluate(expr.left);
 
 		if (expr.operator.type == TokenType.OR) {
-			if (isTruthy(left))
+			if (isTruth(left))
 				return left;
 		} else {
-			if (!isTruthy(left))
+			if (!isTruth(left))
 				return left;
 		}
 
@@ -227,7 +227,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
 		switch (expr.operator.type) {
 		case BANG:
-			return !isTruthy(right);
+			return !isTruth(right);
 		case MINUS:
 			checkNumberOperand(expr.operator, right);
 			return -(double) right;
@@ -244,7 +244,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 	private void checkNumberOperand(Token operator, Object operand) {
 		if (operand instanceof Double)
 			return;
-		throw new RuntimeError(operator, "Operand must be a number.");
+		throw new RuntimeError(operator, "Operands must be numbers.");
 	}
 
 	private void checkNumberOperands(Token operator, Object left, Object right) {
@@ -254,7 +254,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 		throw new RuntimeError(operator, "Operands must be numbers.");
 	}
 
-	private boolean isTruthy(Object object) {
+	private boolean isTruth(Object object) {
 		if (object == null)
 			return false;
 		if (object instanceof Boolean)
