@@ -9,7 +9,7 @@ mvn clean package
 
 Run:
 ```bash
-java -jar target/Luna-1.0-SNAPSHOT.jar
+java -jar target/luni-0.1.0.jar
 ```
 
 ## Environment
