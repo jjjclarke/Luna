@@ -61,6 +61,13 @@ public class Luna {
 		if (hadError)
 			return;
 
+		Resolver r = new Resolver(interpreter);
+		r.resolve(statements);
+
+		// Stop if resolution error
+		if (hadError)
+			return;
+
 		interpreter.interpret(statements);
 	}
 

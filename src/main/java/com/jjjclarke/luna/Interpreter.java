@@ -1,10 +1,13 @@
 package com.jjjclarke.luna;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 	public final Environment globals = new Environment();
+	private final Map<Expr, Integer> locals = new HashMap<>();
 	private Environment environment = globals;
 
 	public Interpreter() {
@@ -42,6 +45,10 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
 	private void execute(Stmt stmt) {
 		stmt.accept(this);
+	}
+
+	public void resolve(Expr expr, int death) {
+		locals.put(expr, death);
 	}
 
 	public void executeBlock(List<Stmt> statements, Environment environment) {
@@ -124,7 +131,12 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 	@Override
 	public Object visitAssignExpr(Expr.Assign expr) {
 		Object value = evaluate(expr.value);
-		environment.assign(expr.name, value);
+		Integer dist = locals.get(expr);
+		if (dist != null) {
+			environment.assignAt(dist, expr.name, value);
+		} else {
+			globals.assign(expr.name, value);
+		}
 		return value;
 	}
 
@@ -238,7 +250,16 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
 	@Override
 	public Object visitVariableExpr(Expr.Variable expr) {
-		return environment.get(expr.name);
+		return lookUpVariable(expr.name, expr);
+	}
+
+	private Object lookUpVariable(Token name, Expr expr) {
+		Integer distance = locals.get(expr);
+		if (distance != null) {
+			return environment.getAt(distance, name.lexeme);
+		} else {
+			return globals.get(name);
+		}
 	}
 
 	private void checkNumberOperand(Token operator, Object operand) {
