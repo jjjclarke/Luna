@@ -17,7 +17,7 @@ public class Lexer {
         keywords.put("else",   ELSE);
         keywords.put("false",  FALSE);
         keywords.put("for",    FOR);
-        keywords.put("func",    FUN);
+        keywords.put("void",    FUN); // Changed from fun, to func, to void.
         keywords.put("if",     IF);
         keywords.put("nil",    NIL);
         keywords.put("or",     OR);
