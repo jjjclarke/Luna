@@ -1,7 +1,0 @@
-func hello(name) {
-	print "Hi " + name + "!";
-}
-
-var name = "James";
-hello(name);
-

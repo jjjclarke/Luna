@@ -6,9 +6,19 @@ class LunaFunction implements LunaCallable {
     private final Stmt.Function declaration;
     private final Environment closure;
 
-    public LunaFunction(Stmt.Function declaration, Environment closure) {
+    private final boolean isInitialiser;
+
+    public LunaFunction(Stmt.Function declaration, Environment closure, boolean isInitialiser) {
         this.closure = closure;
         this.declaration = declaration;
+        this.isInitialiser = isInitialiser;
+    }
+
+    public LunaFunction bind(LunaInstance instance) {
+        Environment environment = new Environment(closure);
+        environment.define("this", instance);
+
+        return new LunaFunction(declaration, environment, isInitialiser);
     }
 
     @Override
@@ -27,9 +37,14 @@ class LunaFunction implements LunaCallable {
         try {
             interpreter.executeBlock(declaration.body, environment);
         } catch (Return returnValue) {
+            if (isInitialiser)
+                return closure.getAt(0, "this");
+
             return returnValue.value;
         }
 
+        if (isInitialiser)
+            return closure.getAt(0, "this");
         return null;
     }
 

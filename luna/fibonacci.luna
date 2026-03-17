@@ -1,4 +1,4 @@
-func fib(n) {
+void fib(n) {
   if (n < 2) {
     return n;
   }

@@ -78,7 +78,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
 	@Override
 	public Void visitFunctionStmt(Stmt.Function stmt) {
-		LunaFunction function = new LunaFunction(stmt, environment);
+		LunaFunction function = new LunaFunction(stmt, environment, false);
 		environment.define(stmt.name.lexeme, function);
 		return null;
 	}
@@ -125,6 +125,21 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 		while (isTruth(evaluate(stmt.condition))) {
 			execute(stmt.body);
 		}
+		return null;
+	}
+
+	@Override
+	public Void visitClassStmt(Stmt.Class stmt) {
+		environment.define(stmt.name.lexeme, null);
+
+		Map<String, LunaFunction> methods = new HashMap<>();
+		for (Stmt.Function method : stmt.methods) {
+			LunaFunction function = new LunaFunction(method, environment, method.name.lexeme.equals("init"));
+			methods.put(method.name.lexeme, function);
+		}
+		LunaClass clas = new LunaClass(stmt.name.lexeme, methods);
+
+		environment.assign(stmt.name, clas);
 		return null;
 	}
 
@@ -251,6 +266,33 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 	@Override
 	public Object visitVariableExpr(Expr.Variable expr) {
 		return lookUpVariable(expr.name, expr);
+	}
+
+	@Override
+	public Object visitGetExpr(Expr.Get expr) {
+		Object object = evaluate(expr.object);
+		if (object instanceof LunaInstance) {
+			return ((LunaInstance) object).get(expr.name);
+		}
+
+		throw new RuntimeError(expr.name, "Only instances have properties.");
+	}
+
+	@Override
+	public Object visitSetExpr(Expr.Set expr) {
+		Object object = evaluate(expr.object);
+
+		if (!(object instanceof LunaInstance))
+			throw new RuntimeError(expr.name, "Only instances have fields.");
+
+		Object value = evaluate(expr.value);
+		((LunaInstance) object).set(expr.name, value);
+		return value;
+	}
+
+	@Override
+	public Object visitThisExpr(Expr.This expr) {
+		return lookUpVariable(expr.keyword, expr);
 	}
 
 	private Object lookUpVariable(Token name, Expr expr) {
