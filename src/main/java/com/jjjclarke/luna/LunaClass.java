@@ -5,9 +5,11 @@ import java.util.Map;
 
 public class LunaClass implements LunaCallable {
     public final String name;
+    public final LunaClass superclass;
     private final Map<String, LunaFunction> methods;
 
-    public LunaClass(String name,  Map<String, LunaFunction> methods) {
+    public LunaClass(String name, LunaClass superclass, Map<String, LunaFunction> methods) {
+        this.superclass = superclass;
         this.name = name;
         this.methods = methods;
     }
@@ -15,6 +17,10 @@ public class LunaClass implements LunaCallable {
     public LunaFunction findMethod(String name) {
         if (methods.containsKey(name)) {
             return methods.get(name);
+        }
+
+        if (superclass != null) {
+            return superclass.findMethod(name);
         }
 
         return null;

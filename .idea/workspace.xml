@@ -6,11 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="538ad153-6079-4c42-9aec-f69be6c9b508" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/luna/fibonacci.luna" beforeDir="false" afterPath="$PROJECT_DIR$/luna/fibonacci.luna" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/luna/studio/studio_temp.luna" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/luna/test.luna" beforeDir="false" afterPath="$PROJECT_DIR$/luna/test.luna" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Expr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/LunaFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/LunaFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/LunaClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/LunaClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Resolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Resolver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Stmt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jjjclarke/luna/Stmt.java" afterDir="false" />
