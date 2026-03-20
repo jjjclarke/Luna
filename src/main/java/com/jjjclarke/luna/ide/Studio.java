@@ -2,27 +2,36 @@ package com.jjjclarke.luna.ide;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.io.IOException;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class Studio {
 
@@ -38,7 +47,6 @@ public class Studio {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
 					Studio window = new Studio();
 					window.frmLunaStudio.setVisible(true);
 				} catch (Exception e) {
@@ -113,6 +121,40 @@ public class Studio {
 
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
+		
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(frmLunaStudio), "About Luna Studio", true);
+				dialog.getContentPane().setLayout(new BorderLayout(10, 10));
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				
+				JPanel panel = new JPanel(new BorderLayout(10, 10));
+				panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+				
+				JPanel textPanel = new JPanel(new GridLayout(0, 1));
+				textPanel.add(new JLabel("<html><b>Luna & Luna Studio</b></html>"));
+				textPanel.add(new JLabel("<html><i>Version 0.2.0</i></html>"));
+				textPanel.add(new JLabel(""));
+				textPanel.add(new JLabel("<html>This program uses <b>RSyntaxTextArea</b> to display source code.</html>"));
+				textPanel.add(new JLabel("The source code for Luna and Luna Studio can be found online at:"));
+				textPanel.add(new JLabel("https://github.com/jjjclarke/Luna"));
+				panel.add(textPanel, BorderLayout.CENTER);
+				
+				dialog.getContentPane().add(panel, BorderLayout.CENTER);
+				
+				JButton closeBtn = new JButton("Close");
+				closeBtn.addActionListener(e2 -> dialog.dispose());
+				JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+				buttonPanel.add(closeBtn);
+				dialog.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+				
+				dialog.pack();
+				dialog.setLocationRelativeTo(frmLunaStudio);
+				dialog.setVisible(true);
+			}
+		});
+		mnHelp.add(mntmAbout);
 		frmLunaStudio.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		txtpnSrcInput = new RSyntaxTextArea();
