@@ -1,10 +1,15 @@
-package com.jjjclarke.tools;
+package com.jjjclarke.luna.tools;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+
+/*
+ * NOTE: Do NOT attempt to auto-format this file
+ * when in Eclipse with Ctrl+Shift+F.
+ */
 
 public class GenerateAst {
     public static void main(String[] args) throws IOException {
