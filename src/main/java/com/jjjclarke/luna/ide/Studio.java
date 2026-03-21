@@ -96,6 +96,22 @@ public class Studio {
 			}
 		});
 		mnExamples.add(mntmFibonacci);
+		
+		JMenuItem mntmInheritance = new JMenuItem("Inheritance Example");
+		mntmInheritance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadScript("luna/inheritance.luna");
+			}
+		});
+		mnExamples.add(mntmInheritance);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Block Scope Example");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadScript("luna/block_scope.luna");
+			}
+		});
+		mnExamples.add(mntmNewMenuItem);
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() {

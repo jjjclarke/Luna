@@ -1,0 +1,26 @@
+class Person {
+  init(name) {
+    this.name = name;
+  }
+  
+  getPerson() {
+    return "This person is named " + this.name;
+  }
+}
+
+class Student < Person {
+  init(name, grade) {
+    super.init(name);
+	this.grade = grade;
+  }
+  
+  getPerson() {
+    return "This person is named " + this.name + ". Their grade is " + this.grade;
+  }
+}
+
+var john = Person("John");
+var jane = Student("Jane", "87");
+
+print john.getPerson();
+print jane.getPerson();

@@ -1,0 +1,11 @@
+// This is an example of block scope.
+
+var a = "Outside of any block!";
+
+void block() {
+  var a = "Inside of the block() block.";
+  print a;
+}
+
+block();
+print a;
