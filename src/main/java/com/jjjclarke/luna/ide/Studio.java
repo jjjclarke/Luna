@@ -69,7 +69,7 @@ public class Studio {
 	private void initialize() {
 		frmLunaStudio = new JFrame();
 		frmLunaStudio.setTitle("Luna Studio");
-		frmLunaStudio.setBounds(100, 100, 613, 558);
+		frmLunaStudio.setBounds(100, 100, 1050, 702);
 		frmLunaStudio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -151,9 +151,6 @@ public class Studio {
 			}
 		});
 		mnSource.add(mntmRun1);
-
-		JMenuItem mntnRun2 = new JMenuItem("Run in terminal...");
-		mnSource.add(mntnRun2);
 
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
