@@ -1,0 +1,53 @@
+class Character {
+  init(name, health, attack) {
+    this.name = name;
+	this.health = health;
+	this.attack = attack;
+  }
+  
+  isAlive() {
+    // return a bool
+	return this.health > 0;
+  }
+  
+  hit(target) {
+    print this.name + " attacks " + target.name;
+	target.health = target.health - this.attack;
+  }
+}
+
+class Player < Character {
+  heal() {
+    print this.name + " heals!";
+	this.health = this.health + 5;
+  }
+}
+
+// ================================
+
+var player = Player("James", 30, 6);
+var enemy = Character("Sentinel", 20, 5);
+
+while (player.isAlive() and enemy.isAlive()) {
+  player.hit(enemy);
+  
+  if (enemy.isAlive()) {
+    enemy.hit(player);
+  }
+  
+  if (player.health < 10) {
+    player.heal();
+  }
+  
+  print "Player's HP: ";
+  print player.health;
+  print "Enemy's HP: ";
+  print enemy.health;
+  print "-- Next Turn --";
+}
+
+if (player.isAlive()) {
+  print "You win!";
+} else {
+  print "You lose!";
+}

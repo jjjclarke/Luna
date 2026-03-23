@@ -103,15 +103,35 @@ public class Studio {
 				loadScript("luna/inheritance.luna");
 			}
 		});
+		
+		JMenuItem mntmLoops = new JMenuItem("Loops Example");
+		mntmLoops.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadScript("luna/loops.luna");
+			}
+		});
+		mnExamples.add(mntmLoops);
 		mnExamples.add(mntmInheritance);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Block Scope Example");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		JMenuItem mntmBlockScope = new JMenuItem("Block Scope Example");
+		mntmBlockScope.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadScript("luna/block_scope.luna");
 			}
 		});
-		mnExamples.add(mntmNewMenuItem);
+		mnExamples.add(mntmBlockScope);
+		
+		JMenuItem mntmDivider = new JMenuItem("-------------------------");
+		mntmDivider.setEnabled(false);
+		mnExamples.add(mntmDivider);
+		
+		JMenuItem mntmRpg = new JMenuItem("Text-Based Role Playing Game");
+		mntmRpg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadScript("luna/rpg.luna");
+			}
+		});
+		mnExamples.add(mntmRpg);
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() {
