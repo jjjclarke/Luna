@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -34,6 +33,8 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 public class Studio {
+
+	// private ImageIcon imageIcon = new ImageIcon(getClass().getResource("/luna.png"));
 
 	private JFrame frmLunaStudio;
 	private RSyntaxTextArea txtpnSrcInput;
@@ -69,6 +70,7 @@ public class Studio {
 	private void initialize() {
 		frmLunaStudio = new JFrame();
 		frmLunaStudio.setTitle("Luna Studio");
+		// frmLunaStudio.setIconImage(imageIcon.getImage());
 		frmLunaStudio.setBounds(100, 100, 1050, 702);
 		frmLunaStudio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -96,14 +98,14 @@ public class Studio {
 			}
 		});
 		mnExamples.add(mntmFibonacci);
-		
+
 		JMenuItem mntmInheritance = new JMenuItem("Inheritance Example");
 		mntmInheritance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadScript("luna/inheritance.luna");
 			}
 		});
-		
+
 		JMenuItem mntmLoops = new JMenuItem("Loops Example");
 		mntmLoops.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,7 +114,7 @@ public class Studio {
 		});
 		mnExamples.add(mntmLoops);
 		mnExamples.add(mntmInheritance);
-		
+
 		JMenuItem mntmBlockScope = new JMenuItem("Block Scope Example");
 		mntmBlockScope.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,11 +122,11 @@ public class Studio {
 			}
 		});
 		mnExamples.add(mntmBlockScope);
-		
+
 		JMenuItem mntmDivider = new JMenuItem("-------------------------");
 		mntmDivider.setEnabled(false);
 		mnExamples.add(mntmDivider);
-		
+
 		JMenuItem mntmRpg = new JMenuItem("Text-Based Role Playing Game");
 		mntmRpg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,34 +156,36 @@ public class Studio {
 
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
-		
+
 		JMenuItem mntmAbout = new JMenuItem("About");
 		mntmAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(frmLunaStudio), "About Luna Studio", true);
+				JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(frmLunaStudio),
+						"About Luna Studio", true);
 				dialog.getContentPane().setLayout(new BorderLayout(10, 10));
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				
+
 				JPanel panel = new JPanel(new BorderLayout(10, 10));
 				panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-				
+
 				JPanel textPanel = new JPanel(new GridLayout(0, 1));
 				textPanel.add(new JLabel("<html><b>Luna & Luna Studio</b></html>"));
 				textPanel.add(new JLabel("<html><i>Version 0.2.0</i></html>"));
 				textPanel.add(new JLabel(""));
-				textPanel.add(new JLabel("<html>This program uses <b>RSyntaxTextArea</b> to display source code.</html>"));
+				textPanel.add(
+						new JLabel("<html>This program uses <b>RSyntaxTextArea</b> to display source code.</html>"));
 				textPanel.add(new JLabel("The source code for Luna and Luna Studio can be found online at:"));
 				textPanel.add(new JLabel("https://github.com/jjjclarke/Luna"));
 				panel.add(textPanel, BorderLayout.CENTER);
-				
+
 				dialog.getContentPane().add(panel, BorderLayout.CENTER);
-				
+
 				JButton closeBtn = new JButton("Close");
 				closeBtn.addActionListener(e2 -> dialog.dispose());
 				JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 				buttonPanel.add(closeBtn);
 				dialog.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-				
+
 				dialog.pack();
 				dialog.setLocationRelativeTo(frmLunaStudio);
 				dialog.setVisible(true);

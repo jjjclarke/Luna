@@ -16,7 +16,7 @@ public class Luna {
 
 	public static void main(String[] args) throws IOException {
 		if (args.length > 1) {
-			System.out.println("Usage: luni.jar <script>");
+			System.out.println("Usage: luna.jar <script>");
 			System.exit(1);
 		} else if (args.length == 1) {
 			runFile(args[0]);
@@ -41,8 +41,8 @@ public class Luna {
 		InputStreamReader input = new InputStreamReader(System.in);
 		BufferedReader reader = new BufferedReader(input);
 
-        System.out.println("luni - the Luna Interpreter");
-        System.out.println("version: 0.1.0");
+        System.out.println("luna - the Luna Interpreter");
+        System.out.println("version: 0.3.0");
 
 		while (true) {
 			System.out.print(">> ");
