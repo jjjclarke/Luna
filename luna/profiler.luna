@@ -1,0 +1,14 @@
+// Slow Fibonacci sequence, good for profiling
+// Should take roughly 5 seconds on MY hardware
+
+void profiler(n) {
+  if (n < 2)
+    return n;
+  return profiler(n - 1) + profiler(n - 2);
+}
+
+var before = clock();
+print profiler(35);
+var after = clock();
+print "time:";
+print after - before;

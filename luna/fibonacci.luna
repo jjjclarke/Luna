@@ -1,9 +1,18 @@
 void fib(n) {
+  var a = 0;
+  var b = 1;
+  var c;
+
   if (n < 2) {
     return n;
+  } else {
+    for (var i = 0; i < n - 1; i = i + 1) {
+	  c = a + b;
+      a = b;
+      b = c;	  
+	}
+	return b;
   }
-  
-  return fib(n - 1) + fib (n - 2);
 }
 
 var result = fib(8);
