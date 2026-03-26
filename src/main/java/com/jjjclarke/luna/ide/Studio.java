@@ -122,6 +122,14 @@ public class Studio {
 			}
 		});
 		mnExamples.add(mntmBlockScope);
+		
+		JMenuItem mntmProfiler = new JMenuItem("Slower Fibonacci w/ Profiling");
+		mntmProfiler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadScript("luna/profiler.luna");
+			}
+		});
+		mnExamples.add(mntmProfiler);
 
 		JMenuItem mntmDivider = new JMenuItem("-------------------------");
 		mntmDivider.setEnabled(false);
