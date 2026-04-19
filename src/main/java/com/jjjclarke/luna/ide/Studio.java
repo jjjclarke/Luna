@@ -33,9 +33,6 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 public class Studio {
-
-	// private ImageIcon imageIcon = new ImageIcon(getClass().getResource("/luna.png"));
-
 	private JFrame frmLunaStudio;
 	private RSyntaxTextArea txtpnSrcInput;
 	private JTextArea textArea;
@@ -86,7 +83,7 @@ public class Studio {
 		JMenuItem mntmHelloWorld = new JMenuItem("Hello, World!");
 		mntmHelloWorld.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadScript("luna/hello_world.luna");
+				loadScript("docs/examples/hello_world.luna");
 			}
 		});
 		mnExamples.add(mntmHelloWorld);
@@ -94,7 +91,7 @@ public class Studio {
 		JMenuItem mntmFibonacci = new JMenuItem("Fibonacci Sequence");
 		mntmFibonacci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadScript("luna/fibonacci.luna");
+				loadScript("docs/examples/fibonacci.luna");
 			}
 		});
 		mnExamples.add(mntmFibonacci);
@@ -102,14 +99,14 @@ public class Studio {
 		JMenuItem mntmInheritance = new JMenuItem("Inheritance Example");
 		mntmInheritance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadScript("luna/inheritance.luna");
+				loadScript("docs/examples/inheritance.luna");
 			}
 		});
 
 		JMenuItem mntmLoops = new JMenuItem("Loops Example");
 		mntmLoops.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadScript("luna/loops.luna");
+				loadScript("docs/examples/loops.luna");
 			}
 		});
 		mnExamples.add(mntmLoops);
@@ -118,7 +115,7 @@ public class Studio {
 		JMenuItem mntmBlockScope = new JMenuItem("Block Scope Example");
 		mntmBlockScope.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadScript("luna/block_scope.luna");
+				loadScript("docs/examples/block_scope.luna");
 			}
 		});
 		mnExamples.add(mntmBlockScope);
@@ -126,7 +123,7 @@ public class Studio {
 		JMenuItem mntmProfiler = new JMenuItem("Slower Fibonacci w/ Profiling");
 		mntmProfiler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadScript("luna/profiler.luna");
+				loadScript("docs/examples/profiler.luna");
 			}
 		});
 		mnExamples.add(mntmProfiler);
@@ -138,7 +135,7 @@ public class Studio {
 		JMenuItem mntmRpg = new JMenuItem("Text-Based Role Playing Game");
 		mntmRpg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadScript("luna/rpg.luna");
+				loadScript("docs/examples/rpg.luna");
 			}
 		});
 		mnExamples.add(mntmRpg);
@@ -178,7 +175,7 @@ public class Studio {
 
 				JPanel textPanel = new JPanel(new GridLayout(0, 1));
 				textPanel.add(new JLabel("<html><b>Luna & Luna Studio</b></html>"));
-				textPanel.add(new JLabel("<html><i>Version 0.2.0</i></html>"));
+				textPanel.add(new JLabel("<html><i>Version 0.3.1</i></html>"));
 				textPanel.add(new JLabel(""));
 				textPanel.add(
 						new JLabel("<html>This program uses <b>RSyntaxTextArea</b> to display source code.</html>"));

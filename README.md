@@ -1,23 +1,52 @@
 # Luna
 
-**Notice:** This is my submission for my final year project. 0.3.0 is the last major release: I may release a minor update over the next few weeks, but I'm not going to add any major changes so that my final submission is (a) stable, and (b) matches what was shown in the project presentation.
-
-**Notice:** Luna and its IDE, Luna Studio, are currently fundamentally part of the same program, and they cannot be disconnected from each other without some work, which I'm not going to do due to the point above. If/when I return to the project in the future, beyond graduation, I'll work on that!
-
-## Dev
-
-### Maven
-Luna is, technically, a Maven project and will work in any IDE, and can be built via the command line:
-
-```
-mvn clean package
-java -jar target/Luna-0.3.0.jar
-```
+## Building & Running
 
 ### Eclipse
 
-However, Eclipse is the preferred development environment. You can launch both the REPL and the IDE with the `Launch *.launch` files in the project directory. Ensure you import the project as an existing Maven project, through File -> Import -> Maven -> Existing Maven Projects
+1. Clone
 
-## Sample Luna programs
+```
+git clone https://github.com/jjjclarke/Luna.git
+```
 
-A number of sample Luna programs can be found in the `/luna` directory. These can be accessed in Luna Studio.
+2. Import in Eclipse
+
+Click **File**, then **Import**, search for "*Existing Maven Projects*", and point at the Luna directory that was just clone.
+
+3. Run in Eclipse
+
+Two pre-configured launch configurations are included: **Launch IDE** and **Launch REPL**. Right-click, go to **Run as...** and then select the only option.
+
+### Maven
+
+Using a modern version of Maven is recommended. No Maven executable is included in the repository.
+
+1. Clone
+
+```
+git clone https://github.com/jjjclarke/Luna.git
+cd Luna
+```
+
+2. Use Maven to build
+
+```
+mvn clean package
+```
+
+This will build a copy of `Luna-0.3.1.jar` in the `target` directory.
+
+3. Use Maven to run (required for IDE)
+
+First: Run the REPL directly.
+
+```
+mvn exec:java
+```
+
+Second: Run the built-in IDE directly.
+
+```
+mvn -P studio exec:java
+```

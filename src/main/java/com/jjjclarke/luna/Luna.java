@@ -42,7 +42,7 @@ public class Luna {
 		BufferedReader reader = new BufferedReader(input);
 
         System.out.println("luna - the Luna Interpreter");
-        System.out.println("version: 0.3.0");
+        System.out.println("version: 0.3.1");
 
 		while (true) {
 			System.out.print(">> ");
