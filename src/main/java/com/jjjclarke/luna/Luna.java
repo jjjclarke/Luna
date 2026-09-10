@@ -41,9 +41,6 @@ public class Luna {
 		InputStreamReader input = new InputStreamReader(System.in);
 		BufferedReader reader = new BufferedReader(input);
 
-        System.out.println("luna - the Luna Interpreter");
-        System.out.println("version: 0.3.1");
-
 		while (true) {
 			System.out.print(">> ");
 			String line = reader.readLine();
@@ -51,7 +48,8 @@ public class Luna {
 				break;
 			run(line);
 
-			hadError = false; // An error in the REPL should not kill the entire program
+			// An error in the REPL should not kill the entire program
+			hadError = false;
 		}
 	}
 
