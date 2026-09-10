@@ -6,7 +6,7 @@
 
 	<groupId>com.jjjclarke.luna</groupId>
 	<artifactId>Luna</artifactId>
-	<version>0.3.1</version>
+	<version>0.4.0</version>
 
 	<properties>
 		<main.class>com.jjjclarke.luna.Luna</main.class>
@@ -14,14 +14,6 @@
 		<maven.compiler.target>21</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.fifesoft</groupId>
-			<artifactId>rsyntaxtextarea</artifactId>
-			<version>3.6.2</version>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>
@@ -49,14 +41,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>studio</id>
-			<properties>
-				<main.class>com.jjjclarke.luna.ide.Studio</main.class>
-			</properties>
-		</profile>
-	</profiles>
 
 </project>
